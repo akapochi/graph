@@ -1,28 +1,48 @@
-//「月別データ」
-let mydata = {
-  labels: ["１月", "２月", "３月", "４月", "５月", "６月", "７月"],
-  datasets: [
-    {
-      label: '数量',
-      hoverBackgroundColor: "rgba(255,99,132,0.3)",
-      data: [65, 59, 80, 81, 56, 55, 48],
-    }
-  ]
-};
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
 
-//「オプション設定」
-let options = {
-  title: {
-    display: true,
-    text: 'サンプルチャート'
+function months(config) {
+  var cfg = config || {};
+  var count = cfg.count || 12;
+  var section = cfg.section;
+  var values = [];
+  var i, value;
+
+  for (i = 0; i < count; ++i) {
+    value = MONTHS[Math.ceil(i) % 12];
+    values.push(value.substring(0, section));
   }
+
+  return values;
+}
+
+const labels = months({ count: 7 });
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'My First Dataset',
+    data: [65, 59, 80, 81, 56, 55, 40],
+    fill: false,
+    borderColor: 'rgb(75, 192, 192)',
+    tension: 0.1
+  }]
 };
 
-let canvas = document.getElementById('stage');
-let chart = new Chart(canvas, {
-
-  type: 'bar',  //グラフの種類
-  data: mydata,  //表示するデータ
-  options: options  //オプション設定
-
-});
+const ctx = document.getElementById('stage').getContext('2d');
+const config = {
+  type: 'line',
+  data: data,
+};
+const myChart = new Chart(ctx, config);
