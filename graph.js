@@ -59,8 +59,8 @@ function time(config) {
   let values = [];
   let i, value;
 
-  for (i = 0; i < count; ++i) {
-    value = dates[Math.ceil(i) % 12];
+  for (i = 0; i < count; i++) {
+    value = dates[i];
     values.push(value.substring(0, section));
   }
 
