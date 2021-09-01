@@ -116,7 +116,7 @@ const item3 = [
 ];
 
 const labels = time({ count: dates.length });
-const data = {
+const data_3man = {
   labels: labels,
   datasets: [{
     label: 'ピカチュウ　Vmax　ブロモ',
@@ -124,7 +124,12 @@ const data = {
     fill: false,
     borderColor: 'blue',
     tension: 0.1
-  }, {
+  }]
+};
+
+const data_10man = {
+  labels: labels,
+  datasets: [{
     label: 'メイ　SR　ポケモンカード',
     data: item2,
     fill: false,
@@ -139,9 +144,24 @@ const data = {
   }]
 };
 
-const ctx = document.getElementById('stage').getContext('2d');
-const config = {
-  type: 'line',
-  data: data,
-};
-const myChart = new Chart(ctx, config);
+// 現在のファイル名を取得
+let str = window.location.href.split('/').pop();
+
+if (str === "3man.html") {
+  const ctx_3man = document.getElementById('stage_3man').getContext('2d');
+  const config_3man = {
+    type: 'line',
+    data: data_3man,
+  };
+  const myChart_3man = new Chart(ctx_3man, config_3man);
+}
+
+
+if (str === "10man.html") {
+  const ctx_10man = document.getElementById('stage_10man').getContext('2d');
+  const config_10man = {
+    type: 'line',
+    data: data_10man,
+  };
+  const myChart_10man = new Chart(ctx_10man, config_10man);
+}
